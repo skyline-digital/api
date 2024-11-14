@@ -15,11 +15,23 @@ import (
 type Config struct {
 	Host string
 	Port int
+	DB   DbConfig
 }
 
 type Application struct {
 	Config Config
 	Store  store.Storage
+}
+
+type DbConfig struct {
+	Host         string
+	Port         int
+	User         string
+	Password     string
+	Database     string
+	MaxOpenConns int
+	MaxIdleConns int
+	MaxIdleTime  time.Duration
 }
 
 func (app *Application) Mount() http.Handler {
