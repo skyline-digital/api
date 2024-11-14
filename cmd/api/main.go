@@ -14,10 +14,9 @@ import (
 
 func main() {
 	cfg := api.Config{
-		Host: env.GetString("HOST", "localhost"),
-		Port: env.GetInt("PORT", 8080),
+		Port: env.GetInt("PORT", 3000),
 		DB: api.DbConfig{
-			Addr:         env.GetString("DB_ADDR", "postgres://admin:adminpassword@localhost:5432/skyline?sslmode=disable"),
+			Addr:         env.GetString("DB_ADDR", "postgres://admin:adminpassword@localhost/skyline?sslmode=disable"),
 			MaxOpenConns: env.GetInt("DB_MAX_OPEN_CONNS", 30),
 			MaxIdleConns: env.GetInt("DB_MAX_IDLE_CONNS", 30),
 			MaxIdleTime:  env.GetDuration("DB_MAX_IDLE_TIME", 10*time.Minute),
@@ -33,6 +32,9 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
+
+	defer db.Close()
+	log.Printf("Database connection established")
 
 	store := store.NewStorage(db)
 

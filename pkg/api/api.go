@@ -53,9 +53,8 @@ func (app *Application) Mount() http.Handler {
 }
 
 func (app *Application) Run(mux http.Handler) error {
-
 	srv := &http.Server{
-		Addr:         app.Config.Host + ":" + strconv.Itoa(app.Config.Port),
+		Addr:         ":" + strconv.Itoa(app.Config.Port),
 		Handler:      mux,
 		WriteTimeout: time.Second * 30,
 		ReadTimeout:  time.Second * 10,
