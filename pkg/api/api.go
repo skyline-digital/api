@@ -8,6 +8,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+
+	"github.com/skyline-digital/api/internal/store"
 )
 
 type Config struct {
@@ -17,6 +19,7 @@ type Config struct {
 
 type Application struct {
 	Config Config
+	Store  store.Storage
 }
 
 func (app *Application) Mount() http.Handler {
