@@ -24,11 +24,7 @@ type Application struct {
 }
 
 type DbConfig struct {
-	Host         string
-	Port         int
-	User         string
-	Password     string
-	Database     string
+	Addr         string
 	MaxOpenConns int
 	MaxIdleConns int
 	MaxIdleTime  time.Duration

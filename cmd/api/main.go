@@ -17,11 +17,7 @@ func main() {
 		Host: env.GetString("HOST", "localhost"),
 		Port: env.GetInt("PORT", 8080),
 		DB: api.DbConfig{
-			Host:         env.GetString("DB_HOST", "localhost"),
-			Port:         env.GetInt("DB_PORT", 5432),
-			User:         env.GetString("DB_USER", "admin"),
-			Password:     env.GetString("DB_PASSWORD", "adminpassword"),
-			Database:     env.GetString("DB_NAME", "skyline"),
+			Addr:         env.GetString("DB_ADDR", "postgres://admin:adminpassword@localhost:5432/skyline?sslmode=disable"),
 			MaxOpenConns: env.GetInt("DB_MAX_OPEN_CONNS", 30),
 			MaxIdleConns: env.GetInt("DB_MAX_IDLE_CONNS", 30),
 			MaxIdleTime:  env.GetDuration("DB_MAX_IDLE_TIME", 10*time.Minute),
@@ -29,11 +25,7 @@ func main() {
 	}
 
 	db, err := db.NewPostgres(
-		cfg.DB.Host,
-		cfg.DB.Port,
-		cfg.DB.User,
-		cfg.DB.Password,
-		cfg.DB.Database,
+		cfg.DB.Addr,
 		cfg.DB.MaxOpenConns,
 		cfg.DB.MaxIdleConns,
 		cfg.DB.MaxIdleTime,
